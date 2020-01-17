@@ -11,47 +11,54 @@ $(document).ready(function() {
 
     curDay.text(moment().format("dddd, MMMM Do"))
 
-    // loop to generate time blocks and save buttons
-    for (var i = 0; i < hoursArr.length; i++) {
-        var tBlock = $("<div>")
-        var $tSave = $('<button>')
-        var $tInput = $('<textarea>')
-        var $tHour = $('<div>')
+    // localDis()
+    function localDis() {
+        for (var y = 0; y < hoursArr.length; y++) {
+            if (localStorage.getItem(hoursArr[y]) != null) {
+                $('.input[data-input="' + hoursArr[y] + '"]').text(localStorage.getItem(hoursArr[y]))
 
-        tBlock.attr('class', "dayBlock")
-        rowDiv.append(tBlock)
-
-        $tInput.attr('rows', "3")
-        $tInput.attr('cols', "20")
-        $tInput.attr('value', '')
-        $tInput.attr('type', "submit")
-        $tInput.attr('class', "input")
-        $tInput.attr('data-input', hoursArr[i])
-
-
-
-        $tSave.attr('class', "saveBtn")
-        $tSave.text("save")
-        $tSave.attr('data-input', hoursArr[i])
-
-        $tHour.attr('class', "hour")
-        $tHour.text(hoursArr[i])
-        tBlock.append($tHour, $tInput, $tSave)
-
-
-
+            }
+        }
     }
-    // the click function for each save button
+    if (moment().isBefore(hoursArr[i]))
+    // loop to generate time blocks and save buttons
+        for (var i = 0; i < hoursArr.length; i++) {
+            localDis()
+            var tBlock = $("<div>")
+            var $tSave = $('<button>')
+            var $tInput = $('<textarea>')
+            var $tHour = $('<div>')
+
+            tBlock.attr('class', "dayBlock")
+            rowDiv.append(tBlock)
+
+            $tInput.attr('rows', "3")
+            $tInput.attr('cols', "20")
+            $tInput.attr('value', '')
+            $tInput.attr('type', "submit")
+            $tInput.attr('class', "input")
+            $tInput.attr('data-input', hoursArr[i])
+
+
+
+            $tSave.attr('class', "saveBtn")
+            $tSave.text("save")
+            $tSave.attr('data-input', hoursArr[i])
+
+            $tHour.attr('class', "hour")
+            $tHour.text(hoursArr[i])
+            tBlock.append($tHour, $tInput, $tSave)
+
+
+
+        }
+        // the click function for each save button
     $('.saveBtn').on("click", function() {
         var rowId = this.dataset.input
 
-        if (localStorage.getItem(hoursArr[rowId]) != null) {
-            console.log(this)
-            $('.input[data-input="' + rowId + '"]').val() = localStorage.getItem(rowId);
-        }
+        console.log(localStorage.getItem(rowId))
 
         localStorage.setItem(rowId, $('.input[data-input="' + rowId + '"]').val())
-
 
 
         console.log(this.dataset.input)
@@ -66,6 +73,7 @@ $(document).ready(function() {
 
         // }
     })
+
 
     // if (rowId != "") {
     //     $('.input[data-input="' + rowId + '"]').localStorage.getItem(rowId)
