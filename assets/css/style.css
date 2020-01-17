@@ -43,6 +43,8 @@ textarea {
     color: #000000;
     border-top: 1px dashed #000000;
     float: left;
+    width: 60px;
+    margin-top: 20px;
 }
 
 .past {
